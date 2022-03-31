@@ -1,0 +1,24 @@
+;	STMicroelectronics Workspace file
+
+[Version]
+Keyword=ST7Workspace-V0.7
+
+[Project0]
+Filename=stackpointer\stackpointer.stp
+Dependencies=
+
+[Project1]
+Filename=nightrider-ii\nightriderii.stp
+Dependencies=
+
+[Project2]
+Filename=scale\scale.stp
+Dependencies=
+
+[Project3]
+Filename=playatune\playatune.stp
+Dependencies=
+[Options]
+ActiveProject=playatune
+ActiveConfig=Debug
+AddSortedElements=1

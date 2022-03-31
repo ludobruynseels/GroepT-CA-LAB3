@@ -1,0 +1,8 @@
+Debug/
+cbe.err
+*.pdb
+*.spy
+Release/
+*.wed
+*.wdb
+*.xml

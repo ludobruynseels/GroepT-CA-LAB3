@@ -1,0 +1,20 @@
+;	STMicroelectronics dependencies file
+
+[Version]
+Keyword=ST7Project
+Number=1.3
+
+[Root.Source Files.mapping.asm.Config.0]
+ExternDep= mapping.asm mapping.inc
+
+[Root.Source Files...\external dep\stm8s105k.asm.Config.0]
+ExternDep= "..\external dep\stm8s105k.asm"
+
+[Root.Source Files.src\ioinit.asm.Config.0]
+ExternDep= src\ioinit.asm mapping.inc "c:\program files (x86)\stmicroelectronics\st_toolset\asm\include\stm8s105k.inc"
+
+[Root.Source Files.src\main.asm.Config.0]
+ExternDep= src\main.asm mapping.inc "c:\program files (x86)\stmicroelectronics\st_toolset\asm\include\stm8s105k4.inc" "c:\program files (x86)\stmicroelectronics\st_toolset\asm\include\STM8S105K.inc"
+
+[Root.Source Files.src\timerinit.asm.Config.0]
+ExternDep= src\timerinit.asm mapping.inc "c:\program files (x86)\stmicroelectronics\st_toolset\asm\include\stm8s105k4.inc" "c:\program files (x86)\stmicroelectronics\st_toolset\asm\include\STM8S105K.inc"
