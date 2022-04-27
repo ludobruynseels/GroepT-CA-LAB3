@@ -7,8 +7,10 @@ stm8/
 	extern IOInit.w
 	
 	segment 'ram0'
-counter	dc.w 0
+beatcount dc.w 0
+
 	segment 'rom'
+	
 tones
 	dc.w	$1dee 	;C4 - 261.63 Hz
 	dc.w	$1a9a 	;D4 - 293.66
@@ -19,6 +21,23 @@ tones
 	dc.w  $0fd1		;B4 - 493.88
 	dc.w	$0eee		;C5 - 523.25
 
+
+;birthday tune
+Birthday
+	dc.b 0, 1 ; play tones[0] for a duration of 1 tick
+	dc.b 0, 1 ; play tones[0] for a duration of 1 tick
+	dc.b 1, 2 ; play tones[1] for a duration of 2 tick
+	dc.b 0, 2 ; play tones[0] for a duration of 2 ticks
+	dc.b 2, 2 ; play tones[2] for a duration of 2 ticks
+	dc.b 3, 4 ; play tones[3] for a duration of 4 ticks
+	dc.b 0, 1 ; play tones[0] for a duration of 1 tick
+	dc.b 0, 1 ; play tones[0] for a duration of 1 tick
+	dc.b 1, 2 ; play tones[1] for a duration of 2 ticks
+	dc.b 0, 2 ; play tones[0] for a duration of 2 ticks
+	dc.b 4, 2 ; play tones[4] for a duration of 2 ticks
+	dc.b 3, 4 ; play tones[3] for a duration of 4 ticks
+	dc.b {-1} ; end of tune
+	
 main.l
 	; initialize SP
 	ldw X,#stack_end
