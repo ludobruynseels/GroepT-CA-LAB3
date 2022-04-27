@@ -83,8 +83,17 @@ infinite_loop.l
 TIM3ISR.l	
 	mov TIM3_SR1, #0 ; re-arm interrupt in TIM3 DON NOT DELETE THIS LINE
 
+	ldw x, counter
+	ld a, (patterns,x)
+	ld PD_ODR, a
+	incw x
+	cpw x, numSteps
+	
+	jrne end_tim3isr
+	clrw x
+	
 end_tim3isr
-
+	ldw counter, x
 	iret
 	
 	interrupt NonHandledInterrupt
