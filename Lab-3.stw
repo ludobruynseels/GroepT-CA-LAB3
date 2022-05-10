@@ -18,3 +18,7 @@ Dependencies=
 [Project3]
 Filename=playatune\playatune.stp
 Dependencies=
+[Options]
+ActiveProject=playatune
+ActiveConfig=Debug
+AddSortedElements=1

@@ -8,6 +8,7 @@ stm8/
 	
 	segment 'ram0'
 beatcount dc.w 0
+songIndex dc.w 0
 
 	segment 'rom'
 	
@@ -36,7 +37,7 @@ Birthday
 	dc.b 0, 2 ; play tones[0] for a duration of 2 ticks
 	dc.b 4, 2 ; play tones[4] for a duration of 2 ticks
 	dc.b 3, 4 ; play tones[3] for a duration of 4 ticks
-	dc.b {-1} ; end of tune
+	dc.b $ff ; end of tune
 	
 main.l
 	; initialize SP
@@ -95,10 +96,46 @@ NonHandledInterrupt.l
 
 	interrupt TIM3ISR
 TIM3ISR.l	
-	mov TIM3_SR1, #0 ; acknowledge interrupt. do not delete.
+ 	mov TIM3_SR1, #0 ; acknowledge interrupt. do not delete.
+	
+	bcpl PD_ODR, #6 ;toggle LED 6 to indicate tim3 is working
+	ldw x, songIndex 
+	
+	ld a, (Birthday,x) ; load index of note to play (C=0, D=1, E=2,...)
+	cp a , #$ff ;$ff = -1. -1 indicates end of song.
+	jrne continue 
+	MOV TIM2_CR1,#%00000000 ;if last note: stop timer3
+	jra end_tim3isr ;jmp to end of ISR
+continue
+	call PlayNote ;config of TIM2 to play note has been moved to a subroutine.
+	
+	incw x ; inc X twice because we need to advance pointer by 2 bytes
+	incw x
+	ldw songIndex, x ;store pointer
 	
 end_tim3isr
 	iret
+	
+PlayNote ; configure TIM2 to play frequency
+	sll a
+	pushw x
+	clrw x
+	ld xl, a
+	
+	ldw x, (tones,x)
+		ld a, xh
+		ld TIM2_ARRH, a
+		ld a, xl
+		ld TIM2_ARRL, a
+		
+		srlw x
+		ld a, xh
+		ld TIM2_CCR1H, a
+		ld a, xl
+		ld TIM2_CCR1L, a
+
+		popw x
+	ret
 	
 	segment 'vectit'
 	dc.l {$82000000+main}									; reset

@@ -25,8 +25,8 @@ timerInit
 		MOV TIM3_IER,#$01 ; TIM3 interrupt on update enabled
 		
 		;Configure period of the flash in these registers. Leave all others unchanged.
-		mov TIM3_ARRH, #$ff
-		mov TIM3_ARRL, #$ff
+		mov TIM3_ARRH, #$28
+		mov TIM3_ARRL, #$b0
 		
 		mov TIM3_CNTRH, #0 ;set counter to 0. Do not change!
 		mov TIM3_CNTRL, #0 ;set counter to 0. Do not change!
